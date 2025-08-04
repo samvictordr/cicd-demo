@@ -1,9 +1,13 @@
-name: CI/CD Pipeline
+\name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+  # Also run on tag (for "latest" tag)
+  push:
+    tags:
+      - '*'
 
 jobs:
   build-and-release:
@@ -11,6 +15,10 @@ jobs:
     permissions:
       contents: write
       packages: write
+
+    env:
+      IMAGE_ID: ghcr.io/${{ github.repository }}
+      SHORT_SHA: ${{ github.sha }}
 
     steps:
       - name: Checkout code
@@ -27,21 +35,19 @@ jobs:
       # Build and push Docker image with commit SHA tag
       - name: Build and push Docker image (commit SHA)
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}/webapp
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          SHA_TAG=${GITHUB_SHA::7}
+          IMAGE_ID=$(echo "${IMAGE_ID}" | tr '[A-Z]' '[a-z]')
+          TAG=${SHORT_SHA:0:7}
+          echo "Building and pushing $IMAGE_ID:$TAG"
+          docker build -t $IMAGE_ID:$TAG .
+          docker push $IMAGE_ID:$TAG
 
-          echo "Building and pushing $IMAGE_ID:$SHA_TAG"
-          docker build -t $IMAGE_ID:$SHA_TAG .
-          docker push $IMAGE_ID:$SHA_TAG
-
-      # If this push is also a release, tag as latest
+      # Tag as latest on release (tag push)
       - name: Tag image as latest (on release)
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}/webapp
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          docker tag $IMAGE_ID:${GITHUB_SHA::7} $IMAGE_ID:latest
+          IMAGE_ID=$(echo "${IMAGE_ID}" | tr '[A-Z]' '[a-z]')
+          TAG=${SHORT_SHA:0:7}
+          docker tag $IMAGE_ID:$TAG $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
 
       # Create GitHub Release (always on push)
@@ -52,7 +58,7 @@ jobs:
           name: "Build ${{ github.run_number }}"
           body: |
             Docker image available:
-            - ghcr.io/${{ github.repository }}/webapp:${GITHUB_SHA::7}
+            - ghcr.io/${{ github.repository }}:${{ github.sha }}
 
   deploy-pages:
     needs: build-and-release
