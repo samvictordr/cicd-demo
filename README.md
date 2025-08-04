@@ -2,7 +2,7 @@
 
 [![CI/CD Pipeline](https://github.com/samvictordr/cicd-demo/actions/workflows/cicd.yml/badge.svg)](https://github.com/samvictordr/cicd-demo/actions/workflows/cicd.yml)
 
-This repo demonstrates a simple Node.js web app with a complete CI/CD pipeline using GitHub Actions. The pipeline builds and pushes a Docker image to GitHub Container Registry and deploys a static site to GitHub Pages.
+This repo demonstrates a simple Node.js web app with a complete CI/CD pipeline using GitHub Actions. The pipeline builds and pushes a Docker image to GitHub Container Registry and deploys a static site to GitHub Pages. To quickly check if the CI/CD workflow in this repository is passing, check the status badge above.
 
 ---
 
