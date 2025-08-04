@@ -1,11 +1,9 @@
-\name: CI/CD Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
-  # Also run on tag (for "latest" tag)
-  push:
     tags:
       - '*'
 
