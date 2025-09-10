@@ -1,5 +1,7 @@
 PROJECT REPORT: CI/CD DEMO PROJECT
 
+docker image link: docker pull ghcr.io/samvictordr/cicd-demo:4c3d716
+
 1. Introduction
 This report provides a comprehensive overview of the CI/CD Demo Project, which demonstrates the implementation of a continuous integration and continuous deployment pipeline for a Node.js web application. The project utilizes GitHub Actions for automation, Docker for containerization, and GitHub Pages for deployment.
 
@@ -71,3 +73,4 @@ The project directory contains the following key files and folders:
 
 13. Notes
 This report is intended for formal submission and can be converted to PDF. Please ensure screenshots are added before finalizing. For further details or access to workflow logs, refer to the GitHub repository.
+
