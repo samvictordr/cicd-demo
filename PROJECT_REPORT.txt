@@ -1,0 +1,73 @@
+PROJECT REPORT: CI/CD DEMO PROJECT
+
+1. Introduction
+This report provides a comprehensive overview of the CI/CD Demo Project, which demonstrates the implementation of a continuous integration and continuous deployment pipeline for a Node.js web application. The project utilizes GitHub Actions for automation, Docker for containerization, and GitHub Pages for deployment.
+
+2. Project Objectives
+- Automate the build, test, and deployment process for a web application.
+- Ensure reliable delivery of application updates using CI/CD best practices.
+- Containerize the application for consistent deployment across environments.
+
+3. Repository and Workflow Details
+The project is hosted on GitHub and includes a workflow configuration file for CI/CD automation:
+- Repository Name: samvictordr/cicd-demo
+- Workflow File Location: .github/workflows/cicd.yml
+- The workflow is triggered on pushes to the main branch and on tag creation.
+
+4. CI/CD Pipeline Description
+The CI/CD pipeline consists of the following automated steps:
+• Source code is checked out from the repository.
+• The application is built and tested.
+• A Docker image is created using the provided Dockerfile.
+• The Docker image is pushed to GitHub Container Registry (ghcr.io).
+• On release (tag push), the image is also tagged as 'latest'.
+• A GitHub Release is created for each build, including Docker image information.
+• The static site (public directory) is deployed to GitHub Pages.
+
+5. Docker Image Information
+- Dockerfile is present in the root directory of the repository.
+- Docker images are published to GitHub Container Registry:
+  • Image format: ghcr.io/samvictordr/cicd-demo:<commit-sha>
+  • Latest image: ghcr.io/samvictordr/cicd-demo:latest
+
+6. CI/CD Workflow Results
+The workflow status and results can be monitored via the GitHub Actions tab in the repository. Each workflow run provides logs for build, test, image creation, and deployment steps. Successful runs result in updated Docker images and deployed static sites.
+
+7. Deployment and Application Access
+- The application is deployed as a static site to GitHub Pages.
+- Deployed site URL: https://samvictordr.github.io/cicd-demo/
+
+8. Screenshots of the Deployed Application
+Screenshots of the deployed application should be included in this section. Please capture the live site and insert images here before converting to PDF. Example:
+• Screenshot 1: Home page of the deployed app
+• Screenshot 2: Any additional relevant views
+
+9. Technical Stack
+- Node.js (Express framework)
+- HTML, CSS, JavaScript (static site)
+- Docker
+- GitHub Actions
+
+10. Local Setup and Testing Instructions
+To set up and test the project locally:
+• Clone the repository to your local machine.
+• Install dependencies using npm.
+• Run the application locally with Node.js.
+• Build the Docker image and run the container to verify containerization.
+• Push changes to the main branch or create a tag to trigger the CI/CD workflow.
+
+11. Directory Structure (Summary)
+The project directory contains the following key files and folders:
+- app.js (main application file)
+- package.json (dependencies and scripts)
+- dockerfile (Docker build instructions)
+- public/ (static site content)
+- .github/workflows/cicd.yml (CI/CD workflow configuration)
+
+12. References
+- GitHub Actions documentation
+- GitHub Container Registry documentation
+- GitHub Pages documentation
+
+13. Notes
+This report is intended for formal submission and can be converted to PDF. Please ensure screenshots are added before finalizing. For further details or access to workflow logs, refer to the GitHub repository.
