@@ -1,4 +1,4 @@
-# CI/CD Demo Project
+# CI/CD Basis
 
 [![CI/CD Pipeline](https://github.com/samvictordr/cicd-demo/actions/workflows/cicd.yml/badge.svg)](https://github.com/samvictordr/cicd-demo/actions/workflows/cicd.yml)
 
